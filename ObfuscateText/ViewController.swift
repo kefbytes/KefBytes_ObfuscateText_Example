@@ -19,7 +19,8 @@ class ViewController: UIViewController {
         
 //        simpleHash(constantPassword)
 //        simpleHashWithSalt(constantPassword, className: constantClassName)
-        encryptDecryptTest()
+//        encryptDecryptTest()
+        obfuscateWithClassName()
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,6 +49,31 @@ class ViewController: UIViewController {
         print("encryptedPassword:\(encryptedPassword)")
         print("decryptedPassword:\(decryptedPassword)")
         print("\(constantPassword == decryptedPassword)")
+    }
+    
+    func obfuscateWithClassName() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let superclass:AnyClass = appDelegate.superclass!
+        let hashedkey = superclass.description().sha256()
+        let index = hashedkey.startIndex.advancedBy(16)
+        let key = hashedkey.substringToIndex(index)
+
+        let rootViewController = appDelegate.window!.rootViewController as! ViewController
+        let hashediv = rootViewController.description.sha256()
+        let iv = hashediv.substringToIndex(index)
+        
+        print("obfuscateWithClassName.key = \(key)")
+        print("obfuscateWithClassName.iv = \(iv)")
+        
+        let encryptedPassword = try! constantPassword.aesEncrypt(key, iv: iv)
+        print("obfuscateWithClassName.encryptedPassword = \(encryptedPassword)")
+        
+        let decryptedPassword = try! encryptedPassword.aesDecrypt(key, iv: iv)
+        print("obfuscateWithClassName.decryptedPassword = \(decryptedPassword)")
+        
+        print("decrypted password equals constantPassword: \(constantPassword == decryptedPassword)")
+
     }
 }
 
