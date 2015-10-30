@@ -53,25 +53,14 @@ class ViewController: UIViewController {
     
     func obfuscateWithClassName() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
         let superclass:AnyClass = appDelegate.superclass!
-        let hashedkey = superclass.description().sha256()
-        let index = hashedkey.startIndex.advancedBy(16)
-        let key = hashedkey.substringToIndex(index)
-
-        let rootViewController = appDelegate.window!.rootViewController as! ViewController
-        let hashediv = rootViewController.description.sha256()
+        let hashediv = (superclass.description().sha256())
+        let index = hashediv.startIndex.advancedBy(16)
+        let key = "hdwdygfeblb324r3"
         let iv = hashediv.substringToIndex(index)
-        
-        print("obfuscateWithClassName.key = \(key)")
-        print("obfuscateWithClassName.iv = \(iv)")
-        
+
         let encryptedPassword = try! constantPassword.aesEncrypt(key, iv: iv)
-        print("obfuscateWithClassName.encryptedPassword = \(encryptedPassword)")
-        
         let decryptedPassword = try! encryptedPassword.aesDecrypt(key, iv: iv)
-        print("obfuscateWithClassName.decryptedPassword = \(decryptedPassword)")
-        
         print("decrypted password equals constantPassword: \(constantPassword == decryptedPassword)")
 
     }
