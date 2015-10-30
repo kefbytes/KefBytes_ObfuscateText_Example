@@ -13,18 +13,23 @@ class ViewController: UIViewController {
     
     let constantPassword = "Hanoah0325"
     let constantClassName = "ViewController"
-
+    let authHeader = "SU9TQ29uc3VtZXJVc2VyOnFjdW93Zzdh"
+    
+    let key = "bbC2H19lkVbQDfak"
+    var iv:String = ""
+    var encryptedAuthHeader:String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
 //        simpleHash(constantPassword)
 //        simpleHashWithSalt(constantPassword, className: constantClassName)
-//        encryptDecryptTest()
-        obfuscateWithClassName()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        
+        encryptedAuthHeader = encryptString(authHeader)
+        print("encryptedAuthHeader = \(encryptedAuthHeader!)")
+        
+        print("decrypted encryptedAuthHeader = \(decryptString(encryptedAuthHeader!))")
+        print(authHeader == decryptString(encryptedAuthHeader!))
     }
 
     func simpleHash(password:String) {
@@ -40,30 +45,24 @@ class ViewController: UIViewController {
         print("hashedSaltedPassword = \(hashedSaltedPassword)")
     }
     
-    func encryptDecryptTest() {
-        let key = "bbC2H19lkVbQDfak" // length == 16
-        let iv = "gqLOHUioQ0QjhuvI" // lenght == 16
-        let encryptedPassword = try! constantPassword.aesEncrypt(key, iv: iv)
-        let decryptedPassword = try! encryptedPassword.aesDecrypt(key, iv: iv)
-        print(constantPassword) //string to encrypt
-        print("encryptedPassword:\(encryptedPassword)")
-        print("decryptedPassword:\(decryptedPassword)")
-        print("\(constantPassword == decryptedPassword)")
-    }
-    
-    func obfuscateWithClassName() {
+    func encryptString(stringToEncrypt:String) -> String {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let superclass:AnyClass = appDelegate.superclass!
         let hashediv = (superclass.description().sha256())
         let index = hashediv.startIndex.advancedBy(16)
-        let key = "hdwdygfeblb324r3"
         let iv = hashediv.substringToIndex(index)
-
-        let encryptedPassword = try! constantPassword.aesEncrypt(key, iv: iv)
-        let decryptedPassword = try! encryptedPassword.aesDecrypt(key, iv: iv)
-        print("decrypted password equals constantPassword: \(constantPassword == decryptedPassword)")
-
+        return try! stringToEncrypt.aesEncrypt(key, iv: iv)
     }
+    
+    func decryptString(stringToDecrypt:String) -> String {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let superclass:AnyClass = appDelegate.superclass!
+        let hashediv = (superclass.description().sha256())
+        let index = hashediv.startIndex.advancedBy(16)
+        let iv = hashediv.substringToIndex(index)
+        return try! stringToDecrypt.aesDecrypt(key, iv: iv)
+    }
+
 }
 
 import Foundation
