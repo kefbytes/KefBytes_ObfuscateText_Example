@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E03BB821BE2820200C8486B /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E03BB811BE2820200C8486B /* CryptoSwift.framework */; };
 		1EB0639A1BE27B45006DC143 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB063991BE27B45006DC143 /* AppDelegate.swift */; };
 		1EB0639C1BE27B45006DC143 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB0639B1BE27B45006DC143 /* ViewController.swift */; };
 		1EB0639F1BE27B45006DC143 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB0639D1BE27B45006DC143 /* Main.storyboard */; };
@@ -27,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E03BB801BE2812000C8486B /* ObfuscateText.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ObfuscateText.playground; sourceTree = "<group>"; };
+		1E03BB811BE2820200C8486B /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = "Pods/../build/Debug-iphoneos/CryptoSwift.framework"; sourceTree = "<group>"; };
 		1EB063961BE27B45006DC143 /* ObfuscateText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObfuscateText.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EB063991BE27B45006DC143 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EB0639B1BE27B45006DC143 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E03BB821BE2820200C8486B /* CryptoSwift.framework in Frameworks */,
 				2FFDD94BD25488C1B438621D /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,6 +68,7 @@
 		1EB0638D1BE27B45006DC143 = {
 			isa = PBXGroup;
 			children = (
+				1E03BB801BE2812000C8486B /* ObfuscateText.playground */,
 				1EB063981BE27B45006DC143 /* ObfuscateText */,
 				1EB063AD1BE27B45006DC143 /* ObfuscateTextTests */,
 				1EB063971BE27B45006DC143 /* Products */,
@@ -115,6 +120,7 @@
 		ECED0B15321DCA2836CADEA8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E03BB811BE2820200C8486B /* CryptoSwift.framework */,
 				D3E149B98D13D9E9948A2CF2 /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -403,6 +409,10 @@
 			baseConfigurationReference = B6B66E7B370C269BA2D38348 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = ObfuscateText/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = KefBytesLLC.ObfuscateText;
@@ -415,6 +425,10 @@
 			baseConfigurationReference = 4BA6398AB51B63FE8339975E /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = ObfuscateText/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = KefBytesLLC.ObfuscateText;
